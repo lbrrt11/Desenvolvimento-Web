@@ -1,0 +1,144 @@
+.perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 20px auto;
+    border: 3px solid #222;
+    object-fit: cover;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F7F3E9;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-weight: bold;
+}
+
+nav {
+    background-color: #000;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 40px;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.active {
+    color: #F7F3E9;
+}
+
+.inactive {
+    color: #B3B3B3;
+}
+
+.icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+    margin: 50px auto;
+}
+
+.icons img {
+    width: 90px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.icon-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.icon-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.icons img:hover {
+    transform: scale(1.1);
+}
+
+.contato-lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contato-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 300px;
+}
+
+.contato-icon {
+    width: 40px;
+    height: auto;
+}
+
+main {
+    flex: 1;
+    padding: 0 20px; 
+}
+
+section {
+    max-width: 650px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+footer {
+    background-color: #000;
+    color: #B3B3B3;
+    padding: 10px 0;
+    text-align: center;
+}
