@@ -50,7 +50,14 @@ export async function POST(req) {
       [nome, email, telefone, endereco, data_nascimento, hashedPassword]
     );
 
-    const newClient = { id: result.insertId, nome, email, telefone, endereco, data_nascimento };
+    const newClient = {
+      id_cliente: result.insertId,
+      nome,
+      email,
+      telefone,
+      endereco,
+      data_nascimento
+    };
 
     return new Response(
       JSON.stringify({ message: "Cliente cadastrado com sucesso", client: newClient }),
