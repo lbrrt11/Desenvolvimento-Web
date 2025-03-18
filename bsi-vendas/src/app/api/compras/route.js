@@ -7,8 +7,14 @@ export async function GET() {
       "SELECT id_compra, id_fornecedor, DATE_FORMAT(data_compra, '%Y-%m-%d %H:%i:%s') AS data_compra, valor_total FROM Compra"
     );
 
+    // Adicionando a propriedade 'ativo' como true por padrão
+    const compras = rows.map(compra => ({
+      ...compra,
+      ativo: true, // Considerando que todas as compras iniciam como ativas
+    }));
+
     return new Response(
-      JSON.stringify({ compras: rows }),
+      JSON.stringify({ compras }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -44,8 +50,16 @@ export async function POST(req) {
       [id_fornecedor, parseFloat(valor_total)] // Garantindo que valor_total é numérico
     );
 
+    const newCompra = {
+      id_compra: result.insertId,
+      id_fornecedor,
+      data_compra: new Date().toISOString(),
+      valor_total: parseFloat(valor_total),
+      ativo: true, // Compra criada como ativa por padrão
+    };
+
     return new Response(
-      JSON.stringify({ message: "Compra registrada com sucesso", id_compra: result.insertId }),
+      JSON.stringify({ message: "Compra registrada com sucesso", compra: newCompra }),
       { status: 201 }
     );
   } catch (error) {
@@ -56,4 +70,3 @@ export async function POST(req) {
     );
   }
 }
-
