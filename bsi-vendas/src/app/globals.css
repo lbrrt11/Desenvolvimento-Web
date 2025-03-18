@@ -1,0 +1,194 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #f3f3f3;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.botao-nav {
+  border: none;
+  background: #9b30ff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  color: white;
+  margin-left: 12px;
+}
+
+.botao-nav.ativo {
+  background: #6f1d9b;
+}
+
+.botao-nav:hover:not(.ativo) {
+  background: #ab47bc;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.vazio {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button {
+  border: none;
+  background: #9b30ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: #6f1d9b;
+}
+
+/* Containers */
+#container-clientes, #container-produtos, #container-compras, #container-fornecedores, #container-locais {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+}
+
+#container-clientes.vazio, #container-produtos.vazio, #container-compras.vazio, #container-fornecedores.vazio, #container-locais.vazio {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+/* Cards */
+.cartao-cliente, .cartao-produto, .cartao-compra, .cartao-fornecedor, .cartao-local {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.cartao-cliente h3, .cartao-produto h3, .cartao-compra h3, .cartao-fornecedor h3, .cartao-local h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.cartao-cliente p, .cartao-produto p, .cartao-compra p, .cartao-fornecedor p, .cartao-local p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.cartao-cliente button, .cartao-produto button, .cartao-compra button, .cartao-fornecedor button, .cartao-local button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: #9b30ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cartao-cliente button:hover, .cartao-produto button:hover, .cartao-compra button:hover, .cartao-fornecedor button:hover, .cartao-local button:hover {
+  background: #6f1d9b;
+}
+
+/* Inactive Cards */
+.cartao-cliente.inativo, .cartao-produto.inativo, .cartao-compra.inativo, .cartao-fornecedor.inativo, .cartao-local.inativo {
+  background: #ccc;
+  color: #666;
+}
+
+.cartao-cliente.inativo button, .cartao-produto.inativo button, .cartao-compra.inativo button, .cartao-fornecedor.inativo button, .cartao-local.inativo button {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .conteudo-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal .conteudo-modal input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal .conteudo-modal input[type="date"] {
+  width: 100%;
+}
+
+.modal .conteudo-modal button {
+  padding: 10px;
+  border: none;
+  background: #9b30ff;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal .conteudo-modal button:first-child {
+  margin-right: 10px;
+}
+
+.modal .conteudo-modal button:hover {
+  background: #ab47bc;
+}
