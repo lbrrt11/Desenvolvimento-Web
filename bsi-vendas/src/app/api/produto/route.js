@@ -3,12 +3,13 @@ import { createConnection } from "../../lib/mysql";
 export async function GET() {
   try {
     const connection = await createConnection();
-    const [rows] = await connection.execute("SELECT * FROM Produto");
+    const [rows] = await connection.execute("SELECT id_produto, nome, descricao, preco, quantidade_estoque FROM Produto");
 
-    // Converte o preço para número, se necessário
+    // Mapear os produtos para garantir que o preço seja um número
     const produtos = rows.map(produto => ({
       ...produto,
-      preco: parseFloat(produto.preco) // Converte para número
+      preco: parseFloat(produto.preco), // Converte para número
+      ativo: true, // Considerando que todos os produtos iniciam como ativos
     }));
 
     return new Response(
@@ -26,9 +27,10 @@ export async function GET() {
 
 export async function POST(req) {
   try {
-    const { id_fornecedor, nome, descricao, preco, quantidade_estoque } = await req.json();
+    const { nome, descricao, preco, quantidade_estoque } = await req.json();
 
-    if (!id_fornecedor || !nome || !preco || quantidade_estoque == null) {
+    // Validar se todos os campos estão presentes
+    if (!nome || !descricao || !preco || quantidade_estoque == null) {
       return new Response(
         JSON.stringify({ error: "Todos os campos são obrigatórios." }),
         { status: 400 }
@@ -36,22 +38,24 @@ export async function POST(req) {
     }
 
     const connection = await createConnection();
+
+    // Inserir o produto no banco de dados
     const [result] = await connection.execute(
-      "INSERT INTO Produto (id_fornecedor, nome, descricao, preco, quantidade_estoque) VALUES (?, ?, ?, ?, ?)",
-      [id_fornecedor, nome, descricao, preco, quantidade_estoque]
+      "INSERT INTO Produto (nome, descricao, preco, quantidade_estoque) VALUES (?, ?, ?, ?)",
+      [nome, descricao, preco, quantidade_estoque]
     );
 
     const newProduto = {
       id_produto: result.insertId,
-      id_fornecedor,
       nome,
       descricao,
       preco,
       quantidade_estoque,
+      ativo: true, // Produto é criado como ativo por padrão
     };
 
     return new Response(
-      JSON.stringify({ message: "Produto criado", produto: newProduto }),
+      JSON.stringify({ message: "Produto criado com sucesso", produto: newProduto }),
       { status: 201 }
     );
   } catch (error) {
